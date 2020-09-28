@@ -10,6 +10,12 @@ let account = new AccountPage();
 let user = new AccountTypePage();
 let personalData = new PersonalDataPage();
 
+async function StartTest(){
+    await login.Login();
+    await account.GoToRegistrationCompletion();
+    await user.ChooseUserType();
+    await user.AcceptUserAgreement();
+}
 
 describe('Selectel registration', () => {
     beforeEach(async () => {
@@ -24,10 +30,7 @@ describe('Selectel registration', () => {
             {surname: 'П'},
             {surname: 'Pupkin'},
         ]) {
-            await login.Login();
-            await account.GoToRegistrationCompletion();
-            await user.ChooseUserType();
-            await user.AcceptUserAgreement();
+            await StartTest();
             await personalData.EnterUserSurname(surname);
             await personalData.SubmitChanges();
             await personalData.CheckSurnameError();
@@ -42,10 +45,7 @@ describe('Selectel registration', () => {
             {name: 'В'},
             {name: 'Vasya'},
         ]) {
-            await login.Login();
-            await account.GoToRegistrationCompletion();
-            await user.ChooseUserType();
-            await user.AcceptUserAgreement();
+            await StartTest();
             await personalData.EnterUserName(name);
             await personalData.SubmitChanges();
             await personalData.CheckNameError();
@@ -55,10 +55,7 @@ describe('Selectel registration', () => {
     });
 
     it('Complete registration with empty fields', async () => {
-        await login.Login();
-        await account.GoToRegistrationCompletion();
-        await user.ChooseUserType();
-        await user.AcceptUserAgreement();
+        await StartTest();
         await personalData.EnterUserName('');
         await personalData.EnterUserSurname('');
         await personalData.SubmitChanges();
@@ -68,10 +65,7 @@ describe('Selectel registration', () => {
     });
 
     it('New ticket creation', async () => {
-        await login.Login();
-        await account.GoToRegistrationCompletion();
-        await user.ChooseUserType();
-        await user.AcceptUserAgreement();
+        await StartTest();
         await personalData.CreateTicket();
         await new BasePage().Logout();
     });

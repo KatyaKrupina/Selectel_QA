@@ -27,7 +27,7 @@
 Тесты запускаются в Selenoid. 
 Инструкция для установки: https://aerokube.com/cm/latest/
 
-Для запуска тестов нужен установленный NodeJS и NPM: https://nodejs.org/en/
+Для запуска тестов нужны установленные NodeJS и NPM: https://nodejs.org/en/
 
 Установка модулей:
 
