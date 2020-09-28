@@ -39,6 +39,16 @@ describe('Selectel registration', () => {
         }
     });
 
+    it('Complete registration with empty fields', async () => {
+        await StartTest();
+        await personalData.EnterUserName('');
+        await personalData.EnterUserSurname('');
+        await personalData.SubmitChanges();
+        await personalData.CheckNameIsAbsent();
+        await personalData.CheckSurnameIsAbsent();
+        await new BasePage().Logout();
+    });
+
     it('Complete registration with wrong name', async () => {
         for (const {name} of [
             {name: 'Вася123'},
@@ -52,16 +62,6 @@ describe('Selectel registration', () => {
             await new BasePage().Logout();
             await browser.get('https://my.selectel.ru/');
         }
-    });
-
-    it('Complete registration with empty fields', async () => {
-        await StartTest();
-        await personalData.EnterUserName('');
-        await personalData.EnterUserSurname('');
-        await personalData.SubmitChanges();
-        await personalData.CheckNameIsAbsent();
-        await personalData.CheckSurnameIsAbsent();
-        await new BasePage().Logout();
     });
 
     it('New ticket creation', async () => {
